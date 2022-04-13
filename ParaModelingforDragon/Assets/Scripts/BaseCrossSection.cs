@@ -34,6 +34,10 @@ public class BaseCrossSection : MonoBehaviour
     //制御点から生成される頂点リスト
     public Vector3[] crossSectionPoint;
 
+    //test
+    Vector3[] a;
+    Vector3[] b;
+
     /* パラメータ */
     //断面の中心と制御点との距離  12個の断面，制御点は8個
     float[][] controlPointDistance;
@@ -132,7 +136,7 @@ public class BaseCrossSection : MonoBehaviour
     }
 
     /*
-     * 断面の生成 
+     * 断面の生成
      * 引数
      * parameterArray:パラメータの配列
      */
@@ -167,17 +171,17 @@ public class BaseCrossSection : MonoBehaviour
     /*
      * 制御点の変更
      * 引数
-     * list:現在の制御点リスト
-     * distance:各断面の中心と制御点との距離
+     * nowControlPoint:現在の制御点リスト
+     * parameterArray:各断面の中心と制御点との距離
      */
-    public List<Vector3> ChangeControlPoint(List<Vector3> list, List<float> distance)
+    public Vector3[] ChangeControlPoint(Vector3[] nowControlPoint, float[] parameterArray)
     {
         //現在の制御点のリストを取得する
-        List<Vector3> controlList = list;
-        int controlListSize = controlList.Count;
+        Vector3[] controlList = nowControlPoint;
+        int controlListSize = controlList.Length;
 
         //パラメータから変形された制御点と中心とのきょり倍率を取得
-        List<float> magnification = distance;
+        float[] magnification = parameterArray;
 
         //制御点に倍率を適応
         for(int i = 0; i < controlListSize; i++)
@@ -202,7 +206,11 @@ public class BaseCrossSection : MonoBehaviour
         controlPointDistance = parameter.test_allControlPointDistance;
 
         //テスト用の断面を生成
-        Vector3[] a = MakeCrossSection(controlPointDistance[0]);
+        a = MakeCrossSection(controlPointDistance[0]);
+        foreach (var point in a)
+        {
+            Debug.Log(point);
+        }
     }
 
     // Update is called once per frame
@@ -212,7 +220,16 @@ public class BaseCrossSection : MonoBehaviour
         bool checkparameter = parameter.makeParameterEnd;
         if (checkparameter == true)
         {
-
+            //パラメータの配列を取得
+            controlPointDistance = parameter.test_allControlPointDistance;
+            //断面の再生性
+            a = MakeCrossSection(controlPointDistance[0]);
+            //makeParameterEndをリセット
+            parameter.makeParameterEnd = false;
+            foreach (var point in a)
+            {
+                Debug.Log(point);
+            }
         }
     }
 
@@ -224,18 +241,10 @@ public class BaseCrossSection : MonoBehaviour
     void OnDrawGizmos()
     {
 
-        Gizmos.color = Color.blue;
-        foreach (var point in controlPoint)
-        {
-            Gizmos.DrawSphere(point, 0.1f);
-        }
-
-
         Gizmos.color = Color.red;
-        foreach (var point in crossSectionPoint)
+        foreach (var point in a)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
-
     }
 }
