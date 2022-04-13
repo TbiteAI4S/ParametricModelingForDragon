@@ -12,10 +12,11 @@ public class BaseSlider : MonoBehaviour
     public float nowValue;
 
     //値の変化を通知
-    public bool change = false;
+    public bool changeSlider = false;
 
     //値の更新を確認して通知
-    private float checkChange(float value, float now)
+    //value:現在の値，now:スライダーの値
+    private float checkchangeSlider(float value, float now)
     {
         //スライダーの値を小数第二位で切り捨て
         float floorNow = now * 100;
@@ -25,16 +26,16 @@ public class BaseSlider : MonoBehaviour
         if (value > floorNow)
         {
             value = floorNow;
-            change = true;
+            changeSlider = true;
         }
         else if (value < floorNow)
         {
             value = floorNow;
-            change = true;
+            changeSlider = true;
         }
         else
         {
-            change = false;
+            changeSlider = false;
         }
 
         return value;
@@ -66,6 +67,6 @@ public class BaseSlider : MonoBehaviour
         float now = parameterSlider.value;
 
         //値の更新を確認
-        nowValue = checkChange(nowValue, now);
+        nowValue = checkchangeSlider(nowValue, now);
     }
 }

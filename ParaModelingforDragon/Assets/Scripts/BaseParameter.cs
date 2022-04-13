@@ -31,7 +31,14 @@ public class BaseParameter : MonoBehaviour
     float tesuValue = 1.0f;
 
     /*
+     * 制御点の生成が完了したかどうか
+     */
+    public bool makeParameterEnd = false;
+
+    /*
      * 断面の形を決定
+     * 引数
+     * array:各断面の中心と制御点との距離
      */
     float[] testDecisionCsossSection(float[] array)
     {
@@ -49,6 +56,9 @@ public class BaseParameter : MonoBehaviour
 
     /*
      * スライダー値から断面の変形を行う
+     * 引数
+     * parameter:スライダーの値
+     * arrayArray:全ての断面の中心と制御点との距離
      */
     void testChangeCsossSectionControlPoint(float parameter, float[][] arrayArray)
     {
@@ -90,11 +100,17 @@ public class BaseParameter : MonoBehaviour
          * その後，スライダーの値から制御点の倍率を変化させる
          */
         //テスト用
-        testCheck = test.change;
+        testCheck = test.changeSlider;
+        //もし値が変化していたら
         if(testCheck == true)
         {
+            //新しい値を取得
             tesuValue = test.nowValue;
+            //新しい制御点を作成
             testChangeCsossSectionControlPoint(tesuValue, test_allControlPointDistance);
+            //終了通知
+            testCheck = false;
+            makeParameterEnd = true;
         }
     }
 }

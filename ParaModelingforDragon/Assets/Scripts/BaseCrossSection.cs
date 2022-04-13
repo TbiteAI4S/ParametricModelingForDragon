@@ -37,6 +37,8 @@ public class BaseCrossSection : MonoBehaviour
     /* パラメータ */
     //断面の中心と制御点との距離  12個の断面，制御点は8個
     float[][] controlPointDistance;
+    //各断面の中心と制御点との距離 8個
+    float[] controlPointDistanceEach;
 
     /*
      * **************************************************************
@@ -84,8 +86,11 @@ public class BaseCrossSection : MonoBehaviour
         return pointArray;
     }
 
-    //制御点から断面の頂点を生成
-    //引数：制御点のList
+    /*
+     * 御点から断面の頂点を生成
+     * 引数
+     * array:制御点のList
+    */
     private Vector3[] CreateCrossSectionPoints(Vector3[] array)
     {
         //制御点のリストを取得する
@@ -126,7 +131,11 @@ public class BaseCrossSection : MonoBehaviour
         return createArray;
     }
 
-    //断面の生成
+    /*
+     * 断面の生成 
+     * 引数
+     * parameterArray:パラメータの配列
+     */
     public Vector3[] MakeCrossSection(float[] parameterArray)
     {
         //制御点の生成
@@ -155,8 +164,12 @@ public class BaseCrossSection : MonoBehaviour
      * **************************************************************
      */
 
-    //制御点の変更
-    //引数：制御点のList
+    /*
+     * 制御点の変更
+     * 引数
+     * list:現在の制御点リスト
+     * distance:各断面の中心と制御点との距離
+     */
     public List<Vector3> ChangeControlPoint(List<Vector3> list, List<float> distance)
     {
         //現在の制御点のリストを取得する
@@ -185,15 +198,22 @@ public class BaseCrossSection : MonoBehaviour
         //パラメータスクリプトを取得
         parameter = GameObject.Find("BaseParameter").GetComponent<BaseParameter>();
 
+        //パラメータの配列を取得
         controlPointDistance = parameter.test_allControlPointDistance;
 
+        //テスト用の断面を生成
         Vector3[] a = MakeCrossSection(controlPointDistance[0]);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //パラメータが変化したとき
+        bool checkparameter = parameter.makeParameterEnd;
+        if (checkparameter == true)
+        {
 
+        }
     }
 
 
