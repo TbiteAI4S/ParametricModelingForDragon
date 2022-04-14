@@ -244,7 +244,7 @@ public class BaseCrossSection : MonoBehaviour
         Gizmos.color = Color.red;
         foreach (var point in a)
         {
-            Gizmos.DrawSphere(point, 0.1f);
+            //Gizmos.DrawSphere(point, 0.1f);
         }
     }
 }
