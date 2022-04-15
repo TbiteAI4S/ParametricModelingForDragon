@@ -9,6 +9,8 @@ public class BaseParameter : MonoBehaviour
      */
     //全ての断面の中心と制御点との距離  mainVCurveの個数分必要
     public float[][] test_allControlPointDistance = new float[12][];
+    //全ての断面の中心と制御点との距離 初期値保存用  mainVCurveの個数分必要
+    private float[][] test_allControlPointDistanceSave = new float[12][];
     //各断面の中心と制御点との距離 8個
     float[] test_controlPointDistance = new float[8];
 
@@ -60,15 +62,18 @@ public class BaseParameter : MonoBehaviour
      * parameter:スライダーの値
      * arrayArray:全ての断面の中心と制御点との距離
      */
-    void testChangeCsossSectionControlPoint(float parameter, float[][] arrayArray)
+    void testChangeCsossSectionControlPoint(float parameter, float[][] arrayArray, float[][] saveArray)
     {
         for(int i=0; i<12; i++)
         {
-            float l = i;
-            float k = parameter * (l * 0.1f);
             for(int j=0; j<8; j++)
             {
-                arrayArray[i][j] = arrayArray[i][j] * k;
+                arrayArray[i][j] = saveArray[i][j] + parameter;
+                if (arrayArray[i][j] < 0)
+                {
+                    arrayArray[i][j] = 0f;
+                }
+                //arrayArray[i][j] = arrayArray[i][j] * k;
             }
         }
     }
@@ -89,6 +94,7 @@ public class BaseParameter : MonoBehaviour
         for (int i = 0; i < 12; i++)
         {
             test_allControlPointDistance[i] = testDecisionCsossSection(test_controlPointDistance);
+            test_allControlPointDistanceSave[i] = test_allControlPointDistance[i];
         }
     }
 
@@ -107,7 +113,7 @@ public class BaseParameter : MonoBehaviour
             //新しい値を取得
             tesuValue = test.nowValue;
             //新しい制御点を作成
-            testChangeCsossSectionControlPoint(tesuValue, test_allControlPointDistance);
+            testChangeCsossSectionControlPoint(tesuValue, test_allControlPointDistance, test_allControlPointDistanceSave);
             //終了通知
             testCheck = false;
             makeParameterEnd = true;

@@ -151,6 +151,7 @@ public class BaseCrossSection : MonoBehaviour
         for (int i = 0; i < controlPointSize; i++)
         {
             controlPoint[i] = controlPoint[i] * parameterArray[i];
+            Debug.Log("parameterArray[" + i + "]" + parameterArray[i]);
         }
 
         //制御点から断面頂点を生成
@@ -207,12 +208,14 @@ public class BaseCrossSection : MonoBehaviour
 
         //テスト用の断面を生成
         a = MakeCrossSection(controlPointDistance[0]);
+        MakeMesh();
         foreach (var point in a)
         {
-            Debug.Log(point);
+            //Debug.Log(point);
         }
     }
 
+    int z = 1;
     // Update is called once per frame
     void Update()
     {
@@ -220,6 +223,7 @@ public class BaseCrossSection : MonoBehaviour
         bool checkparameter = parameter.makeParameterEnd;
         if (checkparameter == true)
         {
+            z += 1;
             //パラメータの配列を取得
             controlPointDistance = parameter.test_allControlPointDistance;
             //断面の再生性
@@ -228,8 +232,9 @@ public class BaseCrossSection : MonoBehaviour
             parameter.makeParameterEnd = false;
             foreach (var point in a)
             {
-                Debug.Log(point);
+                //Debug.Log(z+"change"+point);
             }
+            MakeMesh();
         }
     }
 
@@ -238,13 +243,49 @@ public class BaseCrossSection : MonoBehaviour
     /*
      * 確認
      */
+    //生成するメッシュ
+    private Mesh mesh;
+    //面を構成するインデックスリスト
+    private List<int> triangles = new List<int>();
+    private Mesh CreateCrossSectionMeshs()
+    {
+        //メッシュ作成
+        mesh = new Mesh();
+
+        // 面を構成するインデックスリストを作成
+        for (int i = 0; i < 20; i++)
+        {
+            triangles.Add(0);
+            triangles.Add(0 + i + 2);
+            triangles.Add(0 + i + 1);
+        }
+
+        // メッシュに頂点を登録する
+        mesh.SetVertices(crossSectionPoint);
+        // メッシュに面を構成するインデックスリストを登録する
+        mesh.SetTriangles(triangles, 0);
+
+        return mesh;
+    }
+    void MakeMesh()
+    {
+        //メッシュを作る
+        mesh = CreateCrossSectionMeshs();
+        // 作成したメッシュをメッシュフィルターに設定する
+        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        meshFilter.mesh = mesh;
+    }
+
+
     void OnDrawGizmos()
     {
 
         Gizmos.color = Color.red;
-        foreach (var point in a)
+
+        foreach (var point in crossSectionPoint)
         {
-            //Gizmos.DrawSphere(point, 0.1f);
+            Gizmos.DrawSphere(point, 0.1f);
         }
+
     }
 }
