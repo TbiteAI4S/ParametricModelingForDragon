@@ -251,7 +251,6 @@ public class HeadMake : MonoBehaviour
         //断面作成
         makeCrossSectionVertex();
         //曲線作成
-        MakemainV();
         MakeMainVCureve();
         //曲線の接ベクトルを求める
         GetTangent_MainVCureve();
