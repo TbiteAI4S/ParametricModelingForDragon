@@ -14,24 +14,40 @@ public class MakeModel : MonoBehaviour
         new Vector3(4f, 0f, 0f)
     };
     //尾の制御点
-    public List<Vector3> controlPointsTail = new List<Vector3>()
+    public List<Vector3> controllPointsTail = new List<Vector3>()
     {
         new Vector3(4f,0f,0f)
     };
     //首の制御点
-    public List<Vector3> controlPointsNeck = new List<Vector3>()
+    public List<Vector3> controllPointsNeck = new List<Vector3>()
     {
         new Vector3(0f,0f,0.01f)
     };
 
-    /*---頂点の追加---*/
+    /*---尾の制御点の操作---*/
     //尾の制御点の個数
-    int tailPoints = 0;
+    public int tailPoints = 0;
     //尾の制御点を追加
     public void AddTail()
     {
+        //制御点を追加
+        float beforeCP_x = controllPointsTail[0].x;
+        Vector3 newCP = new Vector3(beforeCP_x + 1f, 0f, 0f);
+        controllPointsTail.Add(newCP);
+        //制御点の個数を増やす
         tailPoints += 1;
     }
+    //尾の制御点を減らす
+    public void cutTail()
+    {
+        //制御点を削除
+        tailPoints = tailPoints - 1;
+        //末尾の制御点を削除
+        controllPointsTail.RemoveAt(tailPoints);
+    }
+
+    /*---首の制御点の操作---*/
+
 
 
 
@@ -45,12 +61,12 @@ public class MakeModel : MonoBehaviour
             Gizmos.DrawSphere(point, 0.1f);
         }
         Gizmos.color = Color.red;
-        foreach (var point in controlPointsTail)
+        foreach (var point in controllPointsTail)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
         Gizmos.color = Color.blue;
-        foreach (var point in controlPointsNeck)
+        foreach (var point in controllPointsNeck)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
