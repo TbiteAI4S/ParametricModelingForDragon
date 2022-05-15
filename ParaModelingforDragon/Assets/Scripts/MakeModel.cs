@@ -31,19 +31,20 @@ public class MakeModel : MonoBehaviour
     public void AddTail()
     {
         //制御点を追加
-        float beforeCP_x = controllPointsTail[0].x;
+        float beforeCP_x = controllPointsTail[tailPoints].x;
         Vector3 newCP = new Vector3(beforeCP_x + 1f, 0f, 0f);
         controllPointsTail.Add(newCP);
         //制御点の個数を増やす
         tailPoints += 1;
     }
     //尾の制御点を減らす
-    public void cutTail()
+    public void CutTail()
     {
         //制御点を削除
-        tailPoints = tailPoints - 1;
         //末尾の制御点を削除
         controllPointsTail.RemoveAt(tailPoints);
+        //制御点の個数を減らす
+        tailPoints = tailPoints - 1;
     }
 
     /*---首の制御点の操作---*/
