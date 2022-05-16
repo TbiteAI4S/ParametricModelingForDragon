@@ -48,7 +48,28 @@ public class MakeModel : MonoBehaviour
     }
 
     /*---首の制御点の操作---*/
-
+    //首の制御点を追加
+    public int neckPoints = 0;
+    //首の制御点を増やす
+    public void AddNeck()
+    {
+        //制御点を追加
+        float beforeCP_x = controllPointsNeck[neckPoints].x;
+        float beforeCP_y = controllPointsNeck[neckPoints].y;
+        Vector3 newCP = new Vector3(beforeCP_x + 1f, beforeCP_y + 1f, 0f);
+        controllPointsNeck.Add(newCP);
+        //制御点の個数を増やす
+        neckPoints += 1;
+    }
+    //首の制御点を減らす
+    public void CutNeck()
+    {
+        //制御点を削除
+        //末尾の制御点を削除
+        controllPointsNeck.RemoveAt(neckPoints);
+        //制御点の個数を減らす
+        neckPoints = neckPoints - 1;
+    }
 
 
 

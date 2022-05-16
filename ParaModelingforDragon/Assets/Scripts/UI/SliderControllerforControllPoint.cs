@@ -65,7 +65,7 @@ public class SliderControllerforControllPoint : MonoBehaviour
                 break;
 
             case 1:
-
+                makeModelScript.AddNeck();
                 break;
 
         }
@@ -81,7 +81,7 @@ public class SliderControllerforControllPoint : MonoBehaviour
                 break;
 
             case 1:
-
+                makeModelScript.CutNeck();
                 break;
 
         }
@@ -123,5 +123,6 @@ public class SliderControllerforControllPoint : MonoBehaviour
     {
         ChangeSliderText();
         CheckSlider();
+        Debug.Log(discriminationCP);
     }
 }
