@@ -56,7 +56,7 @@ public class MakeModel : MonoBehaviour
         //制御点を追加
         float beforeCP_x = controllPointsNeck[neckPoints].x;
         float beforeCP_y = controllPointsNeck[neckPoints].y;
-        Vector3 newCP = new Vector3(beforeCP_x + 1f, beforeCP_y + 1f, 0f);
+        Vector3 newCP = new Vector3(beforeCP_x - 0.3f, beforeCP_y + 0.3f, 0f);
         controllPointsNeck.Add(newCP);
         //制御点の個数を増やす
         neckPoints += 1;
