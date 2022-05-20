@@ -70,6 +70,11 @@ public class MakeModel : MonoBehaviour
         //制御点の個数を減らす
         neckPoints = neckPoints - 1;
     }
+    //首を曲げる
+    public void BendNeck()
+    {
+
+    }
 
 
 
