@@ -182,4 +182,33 @@ public class Tools : MonoBehaviour
         float c = Tangentvec.z;
         float d = -a * Vec.x - b * Vec.y - c * Vec.z;
     }
+
+    //シグモイド曲線を作る
+    //引数：制御点のリスト(controllPoints)，曲線の分割数(dv)，曲がりのパラメータ(a, 0<=a<=1)
+    //返り値：曲線の座標リスト
+    public List<Vector3> Sigmoid(List<Vector3> controllPoints, int dv, float a)
+    {
+        //制御点の個数
+        int cpNecks = controllPoints.Count;
+
+        //新しい制御点
+        List<Vector3> newControllPoints = new List<Vector3>();
+
+        //シグモイド曲線を作る
+        //曲線の点の個数
+        int curvePoints = cpNecks * dv;
+        //ステップ数
+        int step = 2 / curvePoints;
+        //リストのインデックス
+        int index = 0;
+        for (int i = -1; i < 1; i = i + step)
+        {
+            float x = i;
+            float y = 1.0f / (1.0f + Mathf.Exp(-a * x));
+            Vector3 newCP = new Vector3(controllPoints[index].x, controllPoints[index].y + y, controllPoints[index].z);
+            newControllPoints.Add(newCP);
+            index += 1;
+        }
+        return newControllPoints;
+    }
 }

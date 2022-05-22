@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MakeModel : MonoBehaviour
 {
+    /*---スクリプト---*/
+    Tools toolscripts;
+
     /*---制御点---*/
     //胴体の制御点
     private Vector3[] controllPointsBody = {
@@ -71,9 +74,15 @@ public class MakeModel : MonoBehaviour
         neckPoints = neckPoints - 1;
     }
     //首を曲げる
-    public void BendNeck()
+    public void BendNeck(float a)
     {
-
+        //新しい制御点
+        List<Vector3> newCPNeck = new List<Vector3>();
+        //曲線の分割数
+        int dv = 1;
+        //曲線を作って更新
+        newCPNeck = toolscripts.Sigmoid(controllPointsNeck, dv, a);
+        controllPointsNeck = newCPNeck;
     }
 
 
@@ -102,7 +111,8 @@ public class MakeModel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //ツールスクリプトの取得
+        toolscripts = GameObject.Find("Tools").GetComponent<Tools>();
     }
 
     // Update is called once per frame
