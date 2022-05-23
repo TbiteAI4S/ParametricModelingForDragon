@@ -77,12 +77,17 @@ public class MakeModel : MonoBehaviour
     public void BendNeck(float a)
     {
         //新しい制御点
-        List<Vector3> newCPNeck = new List<Vector3>();
+        float[] newCPNeck = new float[controllPointsNeck.Count];
         //曲線の分割数
         int dv = 1;
         //曲線を作って更新
         newCPNeck = toolscripts.Sigmoid(controllPointsNeck, dv, a);
-        controllPointsNeck = newCPNeck;
+        for(int i = 0; i < controllPointsNeck.Count; i++)
+        {
+            Vector3 newPoint = controllPointsNeck[i];
+            newPoint.y = newPoint.y + newCPNeck[i];
+            controllPointsNeck[i] = newPoint;
+        }
     }
 
 

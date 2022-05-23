@@ -27,7 +27,7 @@ public class SliderControllerforNeckBend : MonoBehaviour
         sliderValue = bendSlider.value;
 
         //スライダーの値をテキストに反映
-        bendTexts.text = "曲がり係数：" + sliderValue;
+        bendTexts.text = "係数：" + sliderValue;
     }
 
     //制御点の増減を確認する

@@ -186,28 +186,27 @@ public class Tools : MonoBehaviour
     //シグモイド曲線を作る
     //引数：制御点のリスト(controllPoints)，曲線の分割数(dv)，曲がりのパラメータ(a, 0<=a<=1)
     //返り値：曲線の座標リスト
-    public List<Vector3> Sigmoid(List<Vector3> controllPoints, int dv, float a)
+    public float[] Sigmoid(List<Vector3> controllPoints, int dv, float a)
     {
         //制御点の個数
         int cpNecks = controllPoints.Count;
 
-        //新しい制御点
-        List<Vector3> newControllPoints = new List<Vector3>();
-
         //シグモイド曲線を作る
         //曲線の点の個数
         int curvePoints = cpNecks * dv;
+        //新しい制御点のy座標
+        float[] newControllPoints = new float[curvePoints];
         //ステップ数
         int step = 2 / curvePoints;
-        //リストのインデックス
-        int index = 0;
-        for (int i = -1; i < 1; i = i + step)
+        //変数x
+        float x = -1;
+        //曲線を求めて格納
+        for (int i = 0; i < curvePoints; i++)
         {
-            float x = i;
             float y = 1.0f / (1.0f + Mathf.Exp(-a * x));
-            Vector3 newCP = new Vector3(controllPoints[index].x, controllPoints[index].y + y, controllPoints[index].z);
-            newControllPoints.Add(newCP);
-            index += 1;
+            newControllPoints[i] = y;
+            x = x + step;
+
         }
         return newControllPoints;
     }
