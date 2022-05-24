@@ -9,7 +9,10 @@ public class SliderControllerforNeckBend : MonoBehaviour
     MakeModel makeModelScript;
 
     /*---スライダー---*/
+    //曲げのスライダー
     Slider bendSlider;
+    //制御点のスライダー
+    Slider cpSlider;
 
     /*---テキスト---*/
     public Text bendTexts;
@@ -34,22 +37,31 @@ public class SliderControllerforNeckBend : MonoBehaviour
     private void CheckSlider()
     {
         float nowValue = bendSlider.value;
-        //saveより大きい曲がり
-        if(saveValue < nowValue)
+        //cpSliderが2以上の時のみ曲線の変更ができる
+        if (cpSlider.value > 2)
         {
-            //制御点を増やす
-            makeModelScript.BendNeck(nowValue);
-            //saveを更新
-            saveValue = nowValue;
+            //saveより大きい曲がり
+            if (saveValue < nowValue)
+            {
+                //制御点を増やす
+                makeModelScript.BendNeck(nowValue);
+                //saveを更新
+                saveValue = nowValue;
 
-        }//saveより小さい曲がり
-        else if(saveValue > nowValue)
-        {
-            //制御点を減らす
-            makeModelScript.BendNeck(nowValue);
-            //saveを更新
-            saveValue = nowValue;
+            }//saveより小さい曲がり
+            else if (saveValue > nowValue)
+            {
+                //制御点を減らす
+                makeModelScript.BendNeck(nowValue);
+                //saveを更新
+                saveValue = nowValue;
+            }
         }
+        else
+        {
+            //制御点を増やすようにメッセージを出す
+        }
+        
     }
 
     // Start is called before the first frame update
@@ -57,6 +69,7 @@ public class SliderControllerforNeckBend : MonoBehaviour
     {
         makeModelScript = GameObject.Find("MakeModel").GetComponent<MakeModel>();
         bendSlider = this.GetComponent<Slider>();
+        cpSlider= GameObject.Find("ControllPointNeckSlider").GetComponent<Slider>();
         saveValue = bendSlider.value;
     }
 

@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 4773797876839107336}
   - component: {fileID: 374678903704480520}
   m_Layer: 5
-  m_Name: ControllPointSlider
+  m_Name: ControllPointNeckSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

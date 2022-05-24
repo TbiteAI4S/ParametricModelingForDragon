@@ -85,7 +85,7 @@ public class MakeModel : MonoBehaviour
         for(int i = 0; i < controllPointsNeck.Count; i++)
         {
             Vector3 newPoint = controllPointsNeck[i];
-            newPoint.y = newPoint.y + newCPNeck[i];
+            newPoint.y = newCPNeck[i];
             controllPointsNeck[i] = newPoint;
         }
     }
