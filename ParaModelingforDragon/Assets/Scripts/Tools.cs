@@ -197,7 +197,7 @@ public class Tools : MonoBehaviour
         //新しい制御点のy座標
         float[] newControllPoints = new float[curvePoints];
         //ステップ数
-        int step = 2 / curvePoints;
+        float step = 2.0f / (curvePoints - 1.0f);
         //変数x
         float x = -1;
         //曲線を求めて格納
@@ -206,6 +206,7 @@ public class Tools : MonoBehaviour
             float y = 1.0f / (1.0f + Mathf.Exp(-a * x));
             newControllPoints[i] = y;
             x = x + step;
+            Debug.Log("curvePoints" + curvePoints + ",x[" + i + "]:" + x + ",y[" + i + "]:" + y + ",step:" + step);
 
         }
         return newControllPoints;
