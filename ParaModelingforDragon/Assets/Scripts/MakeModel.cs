@@ -10,7 +10,7 @@ public class MakeModel : MonoBehaviour
     /*---制御点---*/
     //胴体の制御点
     private Vector3[] controllPointsBody = {
-        new Vector3(0f, 0f, 0.01f),
+        new Vector3(0f, 0.01f, 0f),
         new Vector3(1f, 0f, 0f),
         new Vector3(2f, 0f, 0f),
         new Vector3(3f, 0f, 0f),
@@ -24,7 +24,7 @@ public class MakeModel : MonoBehaviour
     //首の制御点
     public List<Vector3> controllPointsNeck = new List<Vector3>()
     {
-        new Vector3(0f,0f,0.01f)
+        new Vector3(0f,0.01f,0f)
     };
 
     /*---尾の制御点の操作---*/

@@ -197,9 +197,9 @@ public class Tools : MonoBehaviour
         //新しい制御点のy座標
         float[] newControllPoints = new float[curvePoints];
         //ステップ数
-        float step = 4.0f / ((float)curvePoints - 1.0f);
+        float step = 6.0f / ((float)curvePoints - 1.0f);
         //変数x
-        float x = -2.0f;
+        float x = -3.0f;
         //曲線を求めて格納
         for (int i = 0; i < curvePoints; i++)
         {
