@@ -203,7 +203,7 @@ public class Tools : MonoBehaviour
         //曲線を求めて格納
         for (int i = 0; i < curvePoints; i++)
         {
-            float y = 1.0f / (1.0f + Mathf.Exp(-a * x));
+            float y = 1.0f * x / (1.0f + Mathf.Exp(-a * x));
             newControllPoints[i] = y;
             x = x + step;
             Debug.Log("x[" + i + "]:" + x + ",y[" + i + "]:" + y);

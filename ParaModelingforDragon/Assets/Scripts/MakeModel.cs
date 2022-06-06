@@ -26,6 +26,16 @@ public class MakeModel : MonoBehaviour
     {
         new Vector3(0f,0.01f,0f)
     };
+    //頭の制御点
+    public List<Vector3> controllPointsHead = new List<Vector3>()
+    {
+        new Vector3(0f,0.01f,0f)
+    };
+    //顎の制御点
+    public List<Vector3> controllPointsJaw = new List<Vector3>()
+    {
+        new Vector3(0f,0.01f,0f)
+    };
 
     /*---尾の制御点の操作---*/
     //尾の制御点の個数
@@ -89,6 +99,24 @@ public class MakeModel : MonoBehaviour
             controllPointsNeck[i] = newPoint;
         }
     }
+
+    /*---頭部の制御点の操作---*/
+    /*--頭--*/
+    //頭の制御点を追加
+    public int headPoints = 0;
+    //頭の制御点を増やす
+    public void AddHead()
+    {
+
+    }
+    //頭の制御点を減らす
+    public void CutHead()
+    {
+
+    }
+    /*--下顎--*/
+    //下顎の制御点を追加
+    public int jawPoint = 0;
 
 
 
