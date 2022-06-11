@@ -84,6 +84,7 @@ public class MakeModel : MonoBehaviour
         neckPoints = neckPoints - 1;
     }
     //首を曲げる
+    //引数：曲げる係数(a)
     public void BendNeck(float a)
     {
         //新しい制御点
@@ -101,18 +102,45 @@ public class MakeModel : MonoBehaviour
     }
 
     /*---頭部の制御点の操作---*/
+    //頭部の座標を首の変形に追従
+    //引数：首の制御点(neckList)，追従する制御点(adulationList)
+    private void Adulation(List<Vector3> neckList, List<Vector3> adulationList)
+    {
+        //首の最後の座標を取得
+        int lastNum = neckList.Count - 1;
+        Vector3 neckLastPoint = neckList[lastNum];
+
+        //追従先の基準と首の最後の座標の変化を求める
+        Vector3 change = neckLastPoint - adulationList[0];
+
+        //追従する制御点を全て変化させる
+        int step = adulationList.Count;
+        for(int i = 0; i < step; i++)
+        {
+            adulationList[0] = adulationList[0] + change;
+        }
+    }
     /*--頭--*/
     //頭の制御点を追加
     public int headPoints = 0;
     //頭の制御点を増やす
     public void AddHead()
     {
-
+        //制御点を追加
+        float beforeCP_x = controllPointsHead[headPoints].x;
+        Vector3 newCP = new Vector3(beforeCP_x + 1f, 0f, 0f);
+        controllPointsHead.Add(newCP);
+        //制御点の個数を増やす
+        headPoints += 1;
     }
     //頭の制御点を減らす
     public void CutHead()
     {
-
+        //制御点を削除
+        //末尾の制御点を削除
+        controllPointsHead.RemoveAt(headPoints);
+        //制御点の個数を減らす
+        headPoints = headPoints - 1;
     }
     /*--下顎--*/
     //下顎の制御点を追加
@@ -151,6 +179,7 @@ public class MakeModel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //常に頭を首に追従
+        Adulation(controllPointsNeck, controllPointsHead);
     }
 }

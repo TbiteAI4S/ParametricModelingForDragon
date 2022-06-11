@@ -9,6 +9,7 @@ public class PanelController : MonoBehaviour
     public GameObject bodyPanel;
     public GameObject neckPanel;
     public GameObject tailPanel;
+    public GameObject headPanel;
 
 
 
@@ -18,6 +19,7 @@ public class PanelController : MonoBehaviour
         bodyPanel.SetActive(false);
         neckPanel.SetActive(false);
         tailPanel.SetActive(false);
+        headPanel.SetActive(false);
     }
 
     /*---ボタンを押したら目的のパネルを表示し他のパネルは消す*/
@@ -26,17 +28,28 @@ public class PanelController : MonoBehaviour
         bodyPanel.SetActive(true);
         neckPanel.SetActive(false);
         tailPanel.SetActive(false);
+        headPanel.SetActive(false);
     }
     public void NeckView()
     {
         bodyPanel.SetActive(false);
         neckPanel.SetActive(true);
         tailPanel.SetActive(false);
-    }public void TailView()
+        headPanel.SetActive(false);
+    }
+    public void TailView()
     {
         bodyPanel.SetActive(false);
         neckPanel.SetActive(false);
         tailPanel.SetActive(true);
+        headPanel.SetActive(false);
+    }
+    public void HeadView()
+    {
+        bodyPanel.SetActive(false);
+        neckPanel.SetActive(false);
+        tailPanel.SetActive(false);
+        headPanel.SetActive(true);
     }
 
 
