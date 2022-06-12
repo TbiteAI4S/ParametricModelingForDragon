@@ -117,7 +117,7 @@ public class MakeModel : MonoBehaviour
         int step = adulationList.Count;
         for(int i = 0; i < step; i++)
         {
-            adulationList[0] = adulationList[0] + change;
+            adulationList[i] = adulationList[i] + change;
         }
     }
     /*--頭--*/
@@ -128,7 +128,8 @@ public class MakeModel : MonoBehaviour
     {
         //制御点を追加
         float beforeCP_x = controllPointsHead[headPoints].x;
-        Vector3 newCP = new Vector3(beforeCP_x + 1f, 0f, 0f);
+        float beforeCP_y = controllPointsHead[headPoints].y;
+        Vector3 newCP = new Vector3(beforeCP_x - 1f, beforeCP_y, 0f);
         controllPointsHead.Add(newCP);
         //制御点の個数を増やす
         headPoints += 1;
@@ -164,6 +165,11 @@ public class MakeModel : MonoBehaviour
         }
         Gizmos.color = Color.blue;
         foreach (var point in controllPointsNeck)
+        {
+            Gizmos.DrawSphere(point, 0.1f);
+        }
+        Gizmos.color = Color.yellow;
+        foreach (var point in controllPointsHead)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
