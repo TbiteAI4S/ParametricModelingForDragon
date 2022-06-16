@@ -8,6 +8,7 @@ public class MakeModel : MonoBehaviour
     Tools toolscripts;
 
     /*---制御点---*/
+    /*--胴体--*/
     //胴体の制御点
     private Vector3[] controllPointsBody = {
         new Vector3(0f, 0.01f, 0f),
@@ -26,6 +27,7 @@ public class MakeModel : MonoBehaviour
     {
         new Vector3(0f,0.01f,0f)
     };
+    /*--頭部--*/
     //頭の制御点
     public List<Vector3> controllPointsHead = new List<Vector3>()
     {
@@ -36,6 +38,7 @@ public class MakeModel : MonoBehaviour
     {
         new Vector3(0f,0.01f,0f)
     };
+    /*--脚部--*/
 
     /*---尾の制御点の操作---*/
     //尾の制御点の個数
