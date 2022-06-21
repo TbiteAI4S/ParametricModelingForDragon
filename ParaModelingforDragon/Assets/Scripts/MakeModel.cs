@@ -7,7 +7,7 @@ public class MakeModel : MonoBehaviour
     /*---スクリプト---*/
     Tools toolscripts;
 
-    /*---制御点---*/
+    /*----------------------------制御点---*/
     /*--胴体--*/
     //胴体の制御点
     private Vector3[] controllPointsBody = {
@@ -17,6 +17,8 @@ public class MakeModel : MonoBehaviour
         new Vector3(3f, 0f, 0f),
         new Vector3(4f, 0f, 0f)
     };
+    //背びれの制御点
+    public List<Vector3> controllPointsDorsalFin = new List<Vector3>();
     //尾の制御点
     public List<Vector3> controllPointsTail = new List<Vector3>()
     {
@@ -27,6 +29,7 @@ public class MakeModel : MonoBehaviour
     {
         new Vector3(0f,0.01f,0f)
     };
+
     /*--頭部--*/
     //頭の制御点
     public List<Vector3> controllPointsHead = new List<Vector3>()
@@ -38,7 +41,21 @@ public class MakeModel : MonoBehaviour
     {
         new Vector3(0f,0.01f,0f)
     };
+
     /*--脚部--*/
+
+
+
+
+
+    /*----------------------------制御点の操作---*/
+    /*---背びれの制御点の操作---*/
+    //凸型に変形させる
+    public void Convex()
+    {
+
+    }
+
 
     /*---尾の制御点の操作---*/
     //尾の制御点の個数
@@ -146,6 +163,7 @@ public class MakeModel : MonoBehaviour
         //制御点の個数を減らす
         headPoints = headPoints - 1;
     }
+
     /*--下顎--*/
     //下顎の制御点を追加
     public int jawPoint = 0;
@@ -156,21 +174,31 @@ public class MakeModel : MonoBehaviour
     void OnDrawGizmos()
     {
         //中心線
+        //胴体
         Gizmos.color = Color.white;
         foreach (var point in controllPointsBody)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
+        //背びれ
+        Gizmos.color = Color.black;
+        foreach (var point in controllPointsDorsalFin)
+        {
+            Gizmos.DrawSphere(point, 0.1f);
+        }
+        //尾
         Gizmos.color = Color.red;
         foreach (var point in controllPointsTail)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
+        //首
         Gizmos.color = Color.blue;
         foreach (var point in controllPointsNeck)
         {
             Gizmos.DrawSphere(point, 0.1f);
         }
+        //頭
         Gizmos.color = Color.yellow;
         foreach (var point in controllPointsHead)
         {
@@ -183,6 +211,13 @@ public class MakeModel : MonoBehaviour
     {
         //ツールスクリプトの取得
         toolscripts = GameObject.Find("Tools").GetComponent<Tools>();
+        //胴体の制御点を背びれの制御点とする
+        for(int i=0; i<controllPointsBody.Length; i++)
+        {
+            Vector3 v = controllPointsBody[i];
+            v.y = v.y + 1.0f;
+            controllPointsDorsalFin.Add(v);
+        }
     }
 
     // Update is called once per frame

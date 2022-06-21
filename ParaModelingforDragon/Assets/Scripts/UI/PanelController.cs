@@ -7,7 +7,6 @@ public class PanelController : MonoBehaviour
 {
     //パネル
     public GameObject bodyPanel;
-    public GameObject neckPanel;
     public GameObject tailPanel;
     public GameObject headPanel;
 
@@ -17,7 +16,6 @@ public class PanelController : MonoBehaviour
     {
         //初めは全てのパネルは見えないようにする
         bodyPanel.SetActive(false);
-        neckPanel.SetActive(false);
         tailPanel.SetActive(false);
         headPanel.SetActive(false);
     }
@@ -26,28 +24,18 @@ public class PanelController : MonoBehaviour
     public void BodyView()
     {
         bodyPanel.SetActive(true);
-        neckPanel.SetActive(false);
-        tailPanel.SetActive(false);
-        headPanel.SetActive(false);
-    }
-    public void NeckView()
-    {
-        bodyPanel.SetActive(false);
-        neckPanel.SetActive(true);
         tailPanel.SetActive(false);
         headPanel.SetActive(false);
     }
     public void TailView()
     {
         bodyPanel.SetActive(false);
-        neckPanel.SetActive(false);
         tailPanel.SetActive(true);
         headPanel.SetActive(false);
     }
     public void HeadView()
     {
         bodyPanel.SetActive(false);
-        neckPanel.SetActive(false);
         tailPanel.SetActive(false);
         headPanel.SetActive(true);
     }

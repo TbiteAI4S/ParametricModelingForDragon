@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 4773797876798031611}
   - component: {fileID: 4773797876798031610}
   m_Layer: 5
-  m_Name: ControlPointText
+  m_Name: ControlPointNackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
